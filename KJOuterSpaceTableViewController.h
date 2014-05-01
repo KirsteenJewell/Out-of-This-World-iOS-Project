@@ -1,5 +1,5 @@
 //
-//  KJViewController.h
+//  KJOuterSpaceTableViewController.h
 //  Out of This World
 //
 //  Created by Kirsteen Jewell on 01/05/2014.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KJViewController : UIViewController
+@interface KJOuterSpaceTableViewController : UITableViewController
 
 @end
