@@ -7,6 +7,8 @@
 //
 
 #import "KJOuterSpaceTableViewController.h"
+#import "AstronomicalData.h"
+#import "KJSpaceObject.h"
 
 @interface KJOuterSpaceTableViewController ()
 
@@ -32,6 +34,34 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    
+    self.planets = [[NSMutableArray alloc] init];
+    
+    for(NSMutableDictionary *planetData in [AstronomicalData allKnownPlanets])
+    {
+        NSString *imageName = [NSString stringWithFormat:@"%@.jpg", planetData[PLANET_NAME]];
+        KJSpaceObject *planet = [[KJSpaceObject alloc] initWithData:planetData andImage:[UIImage imageNamed:imageName]];
+        [self.planets addObject:planet];
+    }
+    
+
+    
+//    NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] init];
+//    NSString *firstColour = @"red";
+//    [myDictionary setObject:firstColour forKey:@"fire engine colour"];
+//    [myDictionary setObject:@"blue" forKey:@"ocean colour"];
+//    [myDictionary setObject:@"yellow" forKey:@"star colour"];
+//    
+//    NSLog(@"%@", myDictionary);
+//    
+//    NSString *blueString = [myDictionary objectForKey:@"ocean colour"];
+//    NSLog(@"%@",blueString);
+    
+    NSNumber *myNumber = [NSNumber numberWithInt:5];
+    NSLog(@"%@", myNumber);
+    NSNumber *floatNumber = [NSNumber numberWithFloat:3.14];
+    NSLog(@"%@", floatNumber);
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,26 +76,34 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.planets count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // Configure the cell...
+    KJSpaceObject *planet = [self.planets objectAtIndex:indexPath.row];
+    cell.textLabel.text = planet.name;
+    cell.detailTextLabel.text = planet.nickname;
+    cell.imageView.image = planet.spaceImage;
+    
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
